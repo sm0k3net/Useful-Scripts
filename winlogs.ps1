@@ -8,7 +8,7 @@ param(
 $logsDate = Get-Date -UFormat "%Y%m%d"
 
 #Logs output path
-$logsOutput = "C:\Users\umurashka\Desktop\"+$logsDate+"_"+$type+".txt"
+$logsOutput = "C:\Users\yourusername\Desktop\"+$logsDate+"_"+$type+".txt"
 
 
 #Showing & storing data

@@ -10,7 +10,7 @@ Useful Scripts
 
 <u>Windows, PowerShell:</u>
 
-* <b>Windows Logs Extracting</b> -- PowerShell script to easily extract required logs preformated for quick parsing into text file.
+* <b>winlogs.ps1</b> -- Windows Logs Extracting is a PowerShell script to easily extract required logs preformated for quick parsing into text file.
 Usage:
 <pre>./winlogs.ps1 list  #will show all available logs
      ./winlogs.ps1 "Security" 25  #will store 25 security log events into file with mask "date_logtype.txt" i.e: 20160303_security.txt</pre>

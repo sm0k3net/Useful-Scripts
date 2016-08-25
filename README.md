@@ -7,8 +7,11 @@ Useful Scripts
 * <b>deb-kern-up.sh</b> -- Debian distro kernel update script, don't forget to change version to keep it up to date
 * <b>simple_apache_firewall.sh</b> -- Simple firewall script for apache to block IPs with lots requests from log
 * <b>swap.sh</b> -- Script to count RAM and help create swap for faster system working
+</pre>
+
 <hr />
 
+<pre>
 <u>Windows, PowerShell:</u>
 
 * <b>winlogs.ps1</b> -- Windows Logs Extracting is a PowerShell script to easily extract required logs preformated for quick parsing into text file.

@@ -437,6 +437,11 @@ Order Allow,Deny
 Deny from all
 </Files>
 
+<Files wp-config-sample.php>
+Order Allow,Deny
+Deny from all
+</Files>
+
 <Files readme.html>
 Order Allow,Deny
 Deny from all
@@ -585,5 +590,53 @@ service mysql restart
 
 echo -e "${GREEN}Services succesfully restarted!${NC}"
 sleep 3
+
+echo -e "${GREEN}Adding user & database for WordPress, setting wp-config.php...${NC}"
+echo -e "Please, set username: "
+read db_user
+echo -e "Please, set password: "
+read db_pass
+
+mysql -u root -p <<EOF
+CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_pass';
+CREATE DATABASE IF NOT EXISTS $db_user;
+GRANT ALL PRIVILEGES ON $db_user.* TO '$db_user'@'localhost';
+ALTER DATABASE $db_user CHARACTER SET utf8 COLLATE utf8_general_ci;
+EOF
+
+cat >/var/www/$username/$websitename/www/wp-config.php <<EOL
+<?php
+
+define('DB_NAME', '$db_user');
+
+define('DB_USER', '$db_user');
+
+define('DB_PASSWORD', '$db_pass');
+
+define('DB_HOST', 'localhost');
+
+define('DB_CHARSET', 'utf8');
+
+define('DB_COLLATE', '');
+
+define('AUTH_KEY',         '$db_user');
+define('SECURE_AUTH_KEY',  '$db_user');
+define('LOGGED_IN_KEY',    '$db_user');
+define('NONCE_KEY',        '$db_user');
+define('AUTH_SALT',        '$db_user');
+define('SECURE_AUTH_SALT', '$db_user');
+define('LOGGED_IN_SALT',   '$db_user');
+define('NONCE_SALT',       '$db_user');
+
+$table_prefix  = 'wp_';
+
+define('WP_DEBUG', false);
+
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+
+require_once(ABSPATH . 'wp-settings.php');
+EOL
+
 
 echo -e "Installation & configuration succesfully finished."

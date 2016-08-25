@@ -293,7 +293,7 @@ case $response in
 </VirtualHost>
 EOL
     a2ensite $domain_name
-    service apache2 reload
+    service apache2 restart
     P_IP="`wget http://ipinfo.io/ip -qO -`"
 
     echo -e "${GREEN}Apache2 config was updated!

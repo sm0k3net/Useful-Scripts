@@ -7,7 +7,7 @@ Useful Scripts
 * <b>deb-kern-up.sh</b> -- Debian distro kernel update script, don't forget to change version to keep it up to date
 * <b>simple_apache_firewall.sh</b> -- Simple firewall script for apache to block IPs with lots requests from log
 * <b>swap.sh</b> -- Script to count RAM and help create swap for faster system working
-* <b>wordpress.sh</b -- Special script to help configure Apache, MySQL, WordPress, Swap and some other stuff, automatically installs all required packages, configure files etc
+* <b>wordpress.sh</b> -- Special script to help configure Apache, MySQL, WordPress, Swap and some other stuff, automatically installs all required packages, configure files etc
 </pre>
 
 <hr />

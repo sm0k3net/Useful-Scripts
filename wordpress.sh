@@ -484,9 +484,106 @@ Disallow: */feed
 Disallow: /*?*
 Disallow: /tag
 Disallow: /?author=*
-
 EOL
+
+echo -e "${GREEN}File robots.txt was succesfully created!
+Setting correct rights on user's home directory and 755 rights on robots.txt${NC}"
 
 chmod 755 /var/www/$username/$websitename/www/robots.txt
 
 chown -R $username:$username /var/www/$username
+
+echo -e "${GREEN}Configuring fail2ban...${NC}"
+
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.conf-old
+cat >/etc/fail2ban/jail.conf <<EOL
+[DEFAULT]
+
+ignoreip = 127.0.0.1/8
+ignorecommand =
+bantime  = 1200
+findtime = 1200
+maxretry = 3
+backend = auto
+usedns = warn
+destemail = $domain_email
+sendername = Fail2Ban
+sender = fail2ban@localhost
+banaction = iptables-multiport
+mta = sendmail
+
+# Default protocol
+protocol = tcp
+# Specify chain where jumps would need to be added in iptables-* actions
+chain = INPUT
+# ban & send an e-mail with whois report to the destemail.
+action_mw = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+              %(mta)s-whois[name=%(__name__)s, dest="%(destemail)s", protocol="%(protocol)s", chain="%(chain)s", sendername="%(sendername)s"]
+action = %(action_mw)s
+
+[ssh]
+enabled  = true
+port     = ssh
+filter   = sshd
+logpath  = /var/log/auth.log
+maxretry = 5
+
+[ssh-ddos]
+enabled  = true
+port     = ssh
+filter   = sshd-ddos
+logpath  = /var/log/auth.log
+maxretry = 5
+
+[apache-overflows]
+enabled  = true
+port     = http,https
+filter   = apache-overflows
+logpath  = /var/log/apache*/*error.log
+maxretry = 5
+EOL
+
+service fail2ban restart
+
+echo -e "${GREEN}fail2ban configuration finished!
+fail2ban service was restarted, default confige backuped at /etc/fail2ban/jail.conf-old
+Jails were set for: ssh bruteforce, ssh ddos, apache overflows${NC}"
+
+sleep 3
+
+echo -e "${GREEN} Configuring apache2 prefork & worker modules...${NC}"
+
+cat >/etc/apache2/mods-available/mpm_prefork.conf <<EOL
+<IfModule mpm_prefork_module>
+	StartServers			 1
+	MinSpareServers		  1
+	MaxSpareServers		 3
+	MaxRequestWorkers	  10
+	MaxConnectionsPerChild   3000
+</IfModule>
+EOL
+
+cat > /etc/apache2/mods-available/mpm_worker.conf <<EOL
+<IfModule mpm_worker_module>
+	StartServers			 1
+	MinSpareThreads		 5
+	MaxSpareThreads		 15
+	ThreadLimit			 25
+	ThreadsPerChild		 5
+	MaxRequestWorkers	  25
+	MaxConnectionsPerChild   200
+</IfModule>
+EOL
+
+a2dismod status
+
+echo -e "${GREEN}Configuration of apache mods was succesfully finished!
+Restarting Apache & MySQL services...${NC}"
+
+service apache2 restart
+service mysql restart
+
+echo -e "${GREEN}Services succesfully restarted!${NC}"
+sleep 3
+
+echo -e "Installation & configuration succesfully finished."

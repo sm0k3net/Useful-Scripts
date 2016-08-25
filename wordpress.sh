@@ -263,13 +263,13 @@ case $response in
         ServerAdmin $domain_email
         ServerName $domain_name
         ServerAlias www.$domain_name
-        DocumentRoot /var/www/$username/$websitename/www
+        DocumentRoot /var/www/$username/$websitename/www/
         <Directory />
                 Options +FollowSymLinks
                 AllowOverride All
         </Directory>
         <Directory /var/www/$username/$websitename/www>
-                Options -Indexes +FollowSymLinks MultiViews
+                Options -Indexes +FollowSymLinks +MultiViews
                 AllowOverride All
                 Order allow,deny
                 allow from all
@@ -417,7 +417,6 @@ RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
-</IfModule>
 
 RewriteCond %{query_string} concat.*\( [NC,OR]
 RewriteCond %{query_string} union.*select.*\( [NC,OR]
@@ -426,6 +425,7 @@ RewriteRule ^(.*)$ index.php [F,L]
 
 RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
 RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+</IfModule>
 
 <Files .htaccess>
 Order Allow,Deny

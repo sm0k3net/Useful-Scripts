@@ -207,8 +207,7 @@ Alias /myadminphp /usr/share/phpmyadmin
 EOL
 
 echo -e "${GREEN}Path was succesfully changed!
-New phpMyAdmin path is: /myadminphp (i.e.: yourwebsite.com/myadminphp)
-Later you will need to restart apache2 with script or manually to apply changes.${NC}"
+New phpMyAdmin path is: /myadminphp (i.e.: yourwebsite.com/myadminphp)${NC}"
 
         ;;
     *)
@@ -220,10 +219,6 @@ esac
 
 #creating user
 echo -e "${YELLOW}Adding separate user & creating website home folder for secure running of your website...${NC}"
-
-read -r -p "Do you want to create new user & website folder? [y/N] " response
-case $response in
-    [yY][eE][sS]|[yY]) 
 
   echo -e "${YELLOW}Please, enter new username: ${NC}"
   read username
@@ -239,13 +234,6 @@ case $response in
   Home folder: /var/www/$username/$websitename
   Website folder: /var/www/$username/$websitename/www${NC}"
 
-        ;;
-    *)
-
-  echo -e "${RED}User, group and home folder were not created! You can do this manually, or re run the script.${NC}"
-
-        ;;
-esac
 
 #configuring apache2
 echo -e "${YELLOW}Now we going to configure apache2 for your domain name & website root folder...${NC}"
@@ -303,7 +291,7 @@ EOL
     Admin email was set to: $domain_email
     Root folder was set to: /var/www/$username/$websitename/www
     Option Indexes was set to: -Indexes (to close directory listing)
-    Your server public IP is: $P_IP (Please, set this IP into your domain name 'A' record!)
+    Your server public IP is: $P_IP (Please, set this IP into your domain name 'A' record)
     Website was activated & apache2 service reloaded!
     ${NC}"
 
@@ -346,7 +334,7 @@ case $response in
   2. Social Networks Auto Poster
   3. Add to Any
   4. Easy Watermark"
-  sleep 5
+  sleep 7
   
   SITEMAP="`curl https://wordpress.org/plugins/google-sitemap-generator/ | grep https://downloads.wordpress.org/plugin/google-sitemap-generator.*.*.*.zip | awk '{print $3}' | sed -ne 's/.*\(http[^"]*.zip\).*/\1/p'`"
   wget $SITEMAP -O /tmp/sitemap.zip
@@ -368,6 +356,7 @@ case $response in
   mv /tmp/watermark/* /var/www/$username/$websitename/www/wp-content/plugins/
 
   rm /tmp/sitemap.zip /tmp/snap.zip /tmp/addtoany.zip /tmp/watermark.zip
+  rm -rf /tmp/sitemap/ /tmp/snap/ /tmp/addtoany/ /tmp/watermark/
 
 
   echo -e "Downloading of plugins finished! All plugins were transfered into /wp-content/plugins directory.${NC}"

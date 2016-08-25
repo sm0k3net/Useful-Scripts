@@ -292,6 +292,7 @@ case $response in
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOL
+	a2dissite 000-default
     a2ensite $domain_name
     service apache2 restart
     P_IP="`wget http://ipinfo.io/ip -qO -`"
@@ -408,7 +409,7 @@ esac
 
 #creation of secure .htaccess
 echo -e "${YELLOW}Creation of secure .htaccess file...${NC}"
-
+sleep 3
 cat >/var/www/$username/$websitename/www/.htaccess <<EOL
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -472,7 +473,7 @@ echo -e "${GREEN}.htaccess file was succesfully created!${NC}"
 
 #cration of robots.txt
 echo -e "${YELLOW}Creation of robots.txt file...${NC}"
-
+sleep 3
 cat >/var/www/$username/$websitename/www/robots.txt <<EOL
 User-agent: *
 Disallow: /cgi-bin
@@ -493,13 +494,12 @@ EOL
 
 echo -e "${GREEN}File robots.txt was succesfully created!
 Setting correct rights on user's home directory and 755 rights on robots.txt${NC}"
+sleep 3
 
 chmod 755 /var/www/$username/$websitename/www/robots.txt
 
-chown -R $username:$username /var/www/$username
-
 echo -e "${GREEN}Configuring fail2ban...${NC}"
-
+sleep 3
 cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.conf-old
 cat >/etc/fail2ban/jail.conf <<EOL
 [DEFAULT]
@@ -554,10 +554,10 @@ echo -e "${GREEN}fail2ban configuration finished!
 fail2ban service was restarted, default confige backuped at /etc/fail2ban/jail.conf-old
 Jails were set for: ssh bruteforce, ssh ddos, apache overflows${NC}"
 
-sleep 3
+sleep 5
 
 echo -e "${GREEN} Configuring apache2 prefork & worker modules...${NC}"
-
+sleep 3
 cat >/etc/apache2/mods-available/mpm_prefork.conf <<EOL
 <IfModule mpm_prefork_module>
 	StartServers			 1
@@ -638,5 +638,12 @@ if ( !defined('ABSPATH') )
 require_once(ABSPATH . 'wp-settings.php');
 EOL
 
-
-echo -e "Installation & configuration succesfully finished."
+chown -R $username:$username /var/www/$username
+echo -e "${GREEN}User, database and wp-config.php were succesfully created & configured!${NC}"
+sleep 3
+echo -e "Installation & configuration succesfully finished.
+More about WordPress you can find at: http://wpopen.ru
+Personal blog: http://sm0k3.net
+Twitter: @sm0k3net
+e-mail: info@sm0k3.net
+Bye!"

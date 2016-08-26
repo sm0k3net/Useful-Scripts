@@ -437,11 +437,6 @@ Order Allow,Deny
 Deny from all
 </Files>
 
-<Files install.php>
-Order Allow,Deny
-Deny from all
-</Files>
-
 <Files xmlrpc.php>
 Order allow,deny
 Deny from all

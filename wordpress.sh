@@ -617,7 +617,7 @@ define('SECURE_AUTH_SALT', '$db_user');
 define('LOGGED_IN_SALT',   '$db_user');
 define('NONCE_SALT',       '$db_user');
 
-$table_prefix  = 'wp_';
+\$table_prefix  = 'wp_';
 
 define('WP_DEBUG', false);
 

@@ -581,9 +581,9 @@ echo -e "${GREEN}Services succesfully restarted!${NC}"
 sleep 3
 
 echo -e "${GREEN}Adding user & database for WordPress, setting wp-config.php...${NC}"
-echo -e "Please, set username: "
+echo -e "Please, set username for database: "
 read db_user
-echo -e "Please, set password: "
+echo -e "Please, set password for database user: "
 read db_pass
 
 mysql -u root -p <<EOF
@@ -628,11 +628,9 @@ require_once(ABSPATH . 'wp-settings.php');
 EOL
 
 chown -R $username:$username /var/www/$username
-echo -e "${GREEN}User, database and wp-config.php were succesfully created & configured!${NC}"
+echo -e "${GREEN}Database user, database and wp-config.php were succesfully created & configured!${NC}"
 sleep 3
 echo -e "Installation & configuration succesfully finished.
-More about WordPress you can find at: http://wpopen.ru
-Personal blog: http://sm0k3.net
 Twitter: @sm0k3net
 e-mail: info@sm0k3.net
 Bye!"

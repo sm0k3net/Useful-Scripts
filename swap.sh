@@ -13,6 +13,7 @@ swap=$swap_allowed"M"
 
 echo -e "Detected RAM: $RAM
 Recommended swap size: $swap"
+echo -e "For example you can create swap for 1000M or 2G"
 echo -e "Create swap for: "
 read swap_size
 

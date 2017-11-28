@@ -1,0 +1,2 @@
+Clearing bash history: cat /dev/null > ~/.bash_history && history -c && exit
+Top 10 process that using the most memory: ps aux --sort=-%mem | awk 'NR<=10{print $0}'

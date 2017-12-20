@@ -8,7 +8,7 @@ Useful Scripts
 * <b>simple_apache_firewall.sh</b> -- Simple firewall script for apache to block IPs with lots requests from log
 * <b>swap.sh</b> -- Script to count RAM and help create swap for faster system working
 * <b>wordpress.sh</b> -- Special script to help configure Apache, MySQL, WordPress, Swap and some other stuff, automatically installs all required packages, configure files etc
-* <b> axfr.sh</b> -- script for quick check for possible domain zone trasfer misconfiguration (simple guide inside the file)
+* <b>axfr.sh</b> -- script for quick check for possible domain zone trasfer misconfiguration (simple guide inside the file)
 </pre>
 
 <hr />

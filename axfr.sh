@@ -1,12 +1,6 @@
 #!/bin/bash
-
-# USAGE:
-# $ chmod +x axfr.sh
-# $ cat domains.txt | xargs ./axfr.sh
-# "domains.txt" should contain list of domains to check (1 on each line)
-
 if which dig 2>&1 >/dev/null ; then
-echo "dig installed!"
+echo "Starting the tests..."
 mkdir "domains_check"
 for domain
 do
@@ -25,7 +19,9 @@ do
 		fi
 	done
 done
-
+echo "All tests were finished!"
+sresults=$(grep -c 'success' domains_check/stats.txt) ;  echo "Successful results: $sresults"
+fresults=$(grep -c 'failed' domains_check/stats.txt) ;  echo "Failed results: $fresults"
 else
 	echo "No dig installed..."
 	echo "Use 'apt-get install dnsutils' (Debian/Ubuntu) or 'yum install dnsutils' (CentOS/RHEL)"

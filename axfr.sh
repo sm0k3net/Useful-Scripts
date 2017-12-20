@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# USAGE:
+# $ chmod +x axfr.sh
+# $ cat domains.txt | xargs ./axfr.sh
+# "domains.txt" should contain list of domains to check (1 on each line)
+
 if which dig 2>&1 >/dev/null ; then
 echo "dig installed!"
 mkdir "domains_check"

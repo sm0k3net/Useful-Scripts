@@ -4,7 +4,8 @@
 * **Show folders & files size:** $ for i in G M K; do du -ah | grep [0-9]$i | sort -nr -k 1; done | head -n 11
 * **tcpdump & rsyslog debug (sending log):** $ tcpdump -nnvli any dst host 192.168.1.2 and port 514
 * **tcpdump & rsyslog debug (receiving log):** $ tcpdump -nnvli any src host 192.168.1.1 and port 514
-
+* **Delete line in a file with sed (from line 5 to 10 and line 12):** $ sed -i.bak -e '5,10d;12d' file
+* **Uncomment line with sed and store it:** $ sed 's/^#//' file -i.bak
 
 **Windows commands**
 

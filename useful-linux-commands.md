@@ -6,6 +6,9 @@
 * **tcpdump & rsyslog debug (receiving log):** $ tcpdump -nnvli any src host 192.168.1.1 and port 514
 * **Delete line in a file with sed (from line 5 to 10 and line 12):** $ sed -i.bak -e '5,10d;12d' file
 * **Uncomment line with sed and store it:** $ sed 's/^#//' file -i.bak
+* **List something in the folder and count it:** $ ls -l /etc/ | wc -l
+* **List only rules files names in /suricata/rules (to count them just add "| wc -l"):** $ ls -l /etc/suricata/rules | grep rules | awk '{print $9}'
+
 
 **Windows commands**
 

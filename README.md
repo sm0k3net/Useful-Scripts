@@ -21,3 +21,12 @@ Usage:
  ./winlogs.ps1 list  #will show all available logs
  ./winlogs.ps1 "Security" 25  #will store 25 security log events into file with mask "date_logtype.txt" i.e: 20160303_security.txt</pre>
 </pre>
+
+<pre>
+<u>Windows, Batch: </u>
+* <b>quser.bat</b> -- Windows batch script to check users in domain with "query user" command with list of IP addresses from ip.txt file (1 ip address on the line)
+Usage:
+ 1. Create ip.txt file with list of IP addresses
+ 2. Put in the same directory both files (quser.bat & ip.txt)
+ 3. Start from command line batch file "quser.bat". If need to do output into the file, just use "quser.bat > results.txt" as example.
+</pre>

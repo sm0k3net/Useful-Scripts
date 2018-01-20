@@ -10,6 +10,7 @@
 * **List something in the folder and count it:** $ ls -l /etc/ | wc -l
 * **List only rules files names in /suricata/rules (to count them just add "| wc -l"):** $ ls -l /etc/suricata/rules | grep rules | awk '{print $9}'
 * **Insert content into file with specific line with ed (apt-get install ed):** $ ed -s file2 <<< $'2r file1\nw'
+* **Suricata .SU domains quick fix:** $ /bin/sed -i.bak '/Soviet\sUnion/s/^/#/' /etc/suricata/rules/emerging-dns.rules /etc/suricata/rules/emerging-policy.rules
 
 
 - - - - -

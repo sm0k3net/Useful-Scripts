@@ -17,3 +17,4 @@
 
 # Windows commands
 * **Find active users on remote machines in domain through RPC service (192.168.1.1 example):** query user /server:192.168.1.1
+* **Show processes on remote machine with 'tasklist' through windows console:** tasklist /S 192.168.1.1 /SVC
